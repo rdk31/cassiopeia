@@ -20,7 +20,7 @@ def test_match_history_2():
         summoner=summoner,
         seasons={Season.season_9},
         queues={Queue.ranked_solo_fives},
-        begin_time=arrow.now().shift(days=-140),
+        start_time=arrow.now().shift(days=-140),
         end_time=arrow.now(),
     )
     assert len(match_history) > 0
@@ -32,7 +32,7 @@ def test_match_history_3():
     match_history = cass.get_match_history(
         summoner=summoner,
         queues={Queue.ranked_solo_fives},
-        begin_time=arrow.get(2019, 10, 1),
+        start_time=arrow.get(2019, 10, 1),
         end_time=arrow.get(2019, 10, 31),
     )
     assert len(match_history) == 6
@@ -45,7 +45,7 @@ def test_match_history_5():
         summoner=summoner,
         seasons={Season.season_9},
         queues={Queue.ranked_solo_fives},
-        begin_time=arrow.get(2019, 1, 1),
+        start_time=arrow.get(2019, 1, 1),
         end_time=arrow.now(),
     )
     assert len(match_history) > 0
@@ -57,7 +57,7 @@ def test_match_history_6():
     match_history = cass.get_match_history(
         summoner=summoner,
         queues={Queue.ranked_solo_fives},
-        begin_time=arrow.get(2019, 10, 1),
+        start_time=arrow.get(2019, 10, 1),
         end_time=arrow.get(2019, 10, 31),
     )
     assert len(match_history) > 0
@@ -70,7 +70,7 @@ def test_match_history_7():
         summoner=summoner,
         seasons={Season.season_9},
         queues={Queue.ranked_solo_fives},
-        begin_time=arrow.get(2019, 10, 1),
+        start_time=arrow.get(2019, 10, 1),
     )
     assert len(match_history) > 0
 
@@ -78,7 +78,7 @@ def test_match_history_7():
 def test_match_history_8():
     summoner = cass.Summoner(name="chowdog", region="NA")
     mh = cass.get_match_history(
-        summoner=summoner, begin_index=0, end_index=20, queues={Queue.ranked_solo_fives}
+        summoner=summoner, start=0, end_index=20, queues={Queue.ranked_solo_fives}
     )
     match = mh[0]
     assert len(match.participants) == 10
